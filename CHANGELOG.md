@@ -4,5 +4,4 @@ Legend:
 - 🚀 Feature
 - 🐜 Bug fix
 
-## Version x.x.x
-### Major/Minor/Patch Change 
+## Version 1.0.0 

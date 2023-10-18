@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		89625A3D2ADFB7B900D74ECA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89625A3C2ADFB7B900D74ECA /* ContentView.swift */; };
 		89625A3F2ADFB7BA00D74ECA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89625A3E2ADFB7BA00D74ECA /* Assets.xcassets */; };
 		89625A432ADFB7BA00D74ECA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89625A422ADFB7BA00D74ECA /* Preview Assets.xcassets */; };
+		89625A4B2ADFB85D00D74ECA /* DragonAnnouncement in Frameworks */ = {isa = PBXBuildFile; productRef = 89625A4A2ADFB85D00D74ECA /* DragonAnnouncement */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89625A4B2ADFB85D00D74ECA /* DragonAnnouncement in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +87,9 @@
 			dependencies = (
 			);
 			name = ExampleApp;
+			packageProductDependencies = (
+				89625A4A2ADFB85D00D74ECA /* DragonAnnouncement */,
+			);
 			productName = ExampleApp;
 			productReference = 89625A372ADFB7B900D74ECA /* ExampleApp.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +118,9 @@
 				Base,
 			);
 			mainGroup = 89625A2E2ADFB7B900D74ECA;
+			packageReferences = (
+				89625A492ADFB85D00D74ECA /* XCLocalSwiftPackageReference ".." */,
+			);
 			productRefGroup = 89625A382ADFB7B900D74ECA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -359,6 +367,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		89625A492ADFB85D00D74ECA /* XCLocalSwiftPackageReference ".." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		89625A4A2ADFB85D00D74ECA /* DragonAnnouncement */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DragonAnnouncement;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 89625A2F2ADFB7B900D74ECA /* Project object */;
 }

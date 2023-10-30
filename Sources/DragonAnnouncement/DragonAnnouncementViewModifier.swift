@@ -8,23 +8,36 @@ import SwiftUI
 
 @available(iOS 13.0, *)
 public struct DragonAnnouncementViewModifier: ViewModifier {
-    private var showAnnouncement: Binding<Bool>
-
-    init(_ showAnnouncement: Binding<Bool>) {
-        self.showAnnouncement = showAnnouncement
-    }
+    @State private var showAnnouncement: Bool = false
+    let type: AnnouncementType
 
     public func body(content: Content) -> some View {
-        content
-            .sheet(isPresented: showAnnouncement) {
-                Text("Announcement")
+        ZStack {
+            content
+            VStack {
+                Spacer()
+                AnnouncementView(type: type) {
+                    withAnimation(.easeInOut(duration: 0.75)) {
+                        showAnnouncement.toggle()
+                    }
+                }
+                .padding(.horizontal)
             }
+            .offset(y: showAnnouncement ? 0 : 1000)
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                withAnimation(.easeInOut(duration: 0.75)) {
+                    showAnnouncement.toggle()
+                }
+            }
+        }
     }
 }
 
 @available(iOS 13.0, *)
 public extension View {
-    func announcement(isPresented: Binding<Bool>) -> some View {
-        modifier(DragonAnnouncementViewModifier(isPresented))
+    func announcement(type: AnnouncementType) -> some View {
+        modifier(DragonAnnouncementViewModifier(type: type))
     }
 }

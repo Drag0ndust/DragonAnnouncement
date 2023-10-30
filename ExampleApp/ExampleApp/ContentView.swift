@@ -12,13 +12,12 @@ struct ContentView: View {
     @State private var showAnnouncement: Bool = false
 
     var body: some View {
-        Button {
-            showAnnouncement = true
-        } label: {
-            Text("Show announcement")
+        VStack {
+            Text("Example App")
+            Text("Announcement will appear in 2 seconds")
         }
         .padding()
-        .announcement(isPresented: $showAnnouncement)
+        .announcement()
     }
 }
 

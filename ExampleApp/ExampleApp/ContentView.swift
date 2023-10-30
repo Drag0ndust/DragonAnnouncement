@@ -5,17 +5,21 @@
 //  Created by Drag0ndust on 18.10.23.
 //
 
+import DragonAnnouncement
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showAnnouncement: Bool = false
+
+    let exampleAnnouncement = Announcement(title: "Example", message: "This is an example announcement")
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Example App")
+            Text("Announcement will appear in 2 seconds")
         }
         .padding()
+        .announcement(type: .local(announcement: exampleAnnouncement))
     }
 }
 

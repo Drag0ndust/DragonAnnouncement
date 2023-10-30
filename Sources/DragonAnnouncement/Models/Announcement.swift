@@ -26,6 +26,13 @@ public struct Announcement: Decodable {
     /// - For remote announcement it will be the time after the data was received till it gets presented
     let displayAfter: TimeInterval
 
+    /// Initializer
+    /// - Parameters:
+    ///   - id: Id of the announcement
+    ///   - title: Title to show
+    ///   - message: Message to show
+    ///   - urlToOpen: URL to open
+    ///   - displayAfter: Display announcement after this timespan
     public init(
         id: UUID = .init(),
         title: String,

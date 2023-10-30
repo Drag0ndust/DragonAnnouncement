@@ -36,6 +36,7 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
         }
     }
 
+    /// Toggle the announcement view with an animation
     func showAnnouncementView() {
         withAnimation(.easeInOut(duration: 0.75)) {
             showAnnouncement.toggle()
@@ -45,6 +46,9 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
 
 @available(iOS 13.0, *)
 public extension View {
+    /// Convenience method for adding the `DragonAnnouncementViewModifier`
+    /// - Parameter type: Type of the annoucnement: local or remote
+    /// - Returns: View with the announcement view attached
     func announcement(type: AnnouncementType) -> some View {
         modifier(DragonAnnouncementViewModifier(type: type))
     }

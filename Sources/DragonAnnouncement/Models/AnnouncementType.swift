@@ -17,6 +17,8 @@ public enum AnnouncementType {
     case remote(url: URL)
 }
 
+// MARK: - Preview
+
 extension AnnouncementType {
     static func preview() -> AnnouncementType {
         .local(announcement: .init(title: "My Announcement Title",

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Source: https://stackoverflow.com/a/76436298
 extension View {
     @ViewBuilder
     func `if`<TrueContent: View, FalseContent: View>(

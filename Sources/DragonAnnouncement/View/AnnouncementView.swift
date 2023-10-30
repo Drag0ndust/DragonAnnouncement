@@ -16,12 +16,12 @@ struct AnnouncementView: View {
         self.dismiss = dismiss
 
         switch type {
-        case let .local(announcement):
-            title = announcement.title
-            message = announcement.message
-        case let .remote(url):
-            // Remote functionality will be implemented later
-            break
+            case let .local(announcement):
+                title = announcement.title
+                message = announcement.message
+            case .remote:
+                // Remote functionality will be implemented later
+                break
         }
     }
 
@@ -29,10 +29,11 @@ struct AnnouncementView: View {
     private var message: String = ""
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 15) {
             Text("📣")
                 .font(.title)
                 .padding()
+                .shadow(radius: 4)
             Text(title)
                 .font(.headline)
             Text(message)
@@ -42,11 +43,15 @@ struct AnnouncementView: View {
                     dismiss()
                 } label: {
                     Text("Cancel")
+                        .frame(height: 40)
+                        .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
 
                 Button {} label: {
                     Text("Show")
+                        .frame(height: 40)
+                        .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
             }
@@ -63,5 +68,8 @@ struct AnnouncementView: View {
 }
 
 #Preview {
-    AnnouncementView(type: .preview(), dismiss: {})
+    Group {
+        AnnouncementView(type: .preview(), dismiss: {})
+        AnnouncementView(type: .previewLongMessage(), dismiss: {})
+    }
 }

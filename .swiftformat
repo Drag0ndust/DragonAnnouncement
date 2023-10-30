@@ -1,0 +1,23 @@
+# options
+--maxwidth 120
+
+# rules
+--importgrouping alphabetized
+--indent 4
+--indentcase true
+--self remove
+--selfrequired 
+--trimwhitespace always
+--xcodeindentation disabled
+
+#Disabled Rules
+--disable andOperator
+--disable preferKeyPath
+--disable redundantType
+--disable wrapMultilineStatementBraces
+
+#Enabled Rules
+--enable markTypes
+
+#Exlude Files
+--exclude **/*.generated.swift

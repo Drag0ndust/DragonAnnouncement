@@ -6,6 +6,8 @@
 
 import SwiftUI
 
+// MARK: - DragonAnnouncementViewModifier
+
 @available(iOS 13.0, *)
 public struct DragonAnnouncementViewModifier: ViewModifier {
     @State private var showAnnouncement: Bool = false
@@ -26,11 +28,17 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
             .offset(y: showAnnouncement ? 0 : 1000)
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                withAnimation(.easeInOut(duration: 0.75)) {
-                    showAnnouncement.toggle()
+            if case .local = type {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.showAnnouncementView()
                 }
             }
+        }
+    }
+
+    func showAnnouncementView() {
+        withAnimation(.easeInOut(duration: 0.75)) {
+            showAnnouncement.toggle()
         }
     }
 }

@@ -7,7 +7,10 @@
 
 import SwiftUI
 
+// MARK: - AnnouncementView
+
 struct AnnouncementView: View {
+    @Environment(\.openURL) var openURL
     let type: AnnouncementType
     let dismiss: () -> Void
 
@@ -19,6 +22,7 @@ struct AnnouncementView: View {
             case let .local(announcement):
                 title = announcement.title
                 message = announcement.message
+                urlToOpen = announcement.urlToOpen
             case .remote:
                 // Remote functionality will be implemented later
                 break
@@ -27,6 +31,7 @@ struct AnnouncementView: View {
 
     private var title: String = ""
     private var message: String = ""
+    private var urlToOpen: URL? = nil
 
     var body: some View {
         VStack(spacing: 15) {
@@ -42,18 +47,26 @@ struct AnnouncementView: View {
                 Button {
                     dismiss()
                 } label: {
-                    Text("Cancel")
+                    Text("Close")
                         .frame(height: 40)
                         .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(.bordered)
+                .if(urlToOpen != nil) { button in
+                    button.buttonStyle(.bordered)
+                } else: { button in
+                    button.buttonStyle(.borderedProminent)
+                }
 
-                Button {} label: {
-                    Text("Show")
-                        .frame(height: 40)
-                        .frame(maxWidth: .infinity)
+                if let urlToOpen {
+                    Button {
+                        openURL(urlToOpen)
+                    } label: {
+                        Text("Show")
+                            .frame(height: 40)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
-                .buttonStyle(.borderedProminent)
             }
             .padding(.top)
         }
@@ -61,14 +74,14 @@ struct AnnouncementView: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 25.0)
-                .fill(Color.white)
-                .shadow(color: .gray, radius: 8)
+                .fill(Color(UIColor.systemBackground))
+                .shadow(color: Color(UIColor.systemGray), radius: 8)
         )
     }
 }
 
 #Preview {
-    Group {
+    VStack(spacing: 50) {
         AnnouncementView(type: .preview(), dismiss: {})
         AnnouncementView(type: .previewLongMessage(), dismiss: {})
     }

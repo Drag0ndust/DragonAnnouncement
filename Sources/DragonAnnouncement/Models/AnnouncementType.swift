@@ -17,16 +17,17 @@ public enum AnnouncementType {
     case remote(url: URL)
 }
 
-#if DEBUG
-    extension AnnouncementType {
-        static func preview() -> AnnouncementType {
-            .local(announcement: .init(title: "My Announcement Title",
-                                       message: "My Announcement Message"))
-        }
-
-        static func previewLongMessage() -> AnnouncementType {
-            .local(announcement: .init(title: "My Announcement Title",
-                                       message: "This is a very long message, which is more than one line to check how the linewrap and everything works."))
-        }
+extension AnnouncementType {
+    static func preview() -> AnnouncementType {
+        .local(announcement: .init(title: "My Announcement Title",
+                                   message: "My Announcement Message",
+                                   urlToOpen: URL(
+                                       string: "https://github.com/Drag0ndust/DragonAnnouncement/tree/develop"
+                                   )))
     }
-#endif
+
+    static func previewLongMessage() -> AnnouncementType {
+        .local(announcement: .init(title: "My Announcement Title",
+                                   message: "This is a very long message, which is more than one line to check how the linewrap and everything works."))
+    }
+}

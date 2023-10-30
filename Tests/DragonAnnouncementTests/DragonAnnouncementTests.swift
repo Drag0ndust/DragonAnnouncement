@@ -1,5 +1,5 @@
-import XCTest
 @testable import DragonAnnouncement
+import XCTest
 
 final class DragonAnnouncementTests: XCTestCase {
     func testExample() throws {

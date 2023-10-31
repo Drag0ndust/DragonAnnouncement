@@ -1,6 +1,6 @@
 name: Deploy Documentation
 on:
-  pull_requests:
+  pull_request:
     branches: [develop]
   push:
     branches: [main]

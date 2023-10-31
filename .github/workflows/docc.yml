@@ -32,7 +32,7 @@ jobs:
             transform-for-static-hosting "$PWD/.derivedData/Build/Products/Debug-iphonesimulator/DragonAnnouncement.doccarchive" \
             --hosting-base-path "DragonAnnouncement" \
             --output-path .docs;
-          echo "<script>window.location.href += \"documentation/dragonannouncement\"</script>" > docs/index.html;
+          echo "<script>window.location.href += \"documentation/dragonannouncement\"</script>" > .docs/index.html;
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3

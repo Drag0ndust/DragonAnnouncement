@@ -27,12 +27,12 @@ jobs:
           xcode-version: "15.0.0"
       - name: Run Build Docs
         run: |
-          xcodebuild docbuild -scheme DragonAnnouncement -destination 'platform=iOS Simulator,name=iPhone 15 Pro' -derivedDataPath /tmp/docbuild \
+          xcodebuild docbuild -scheme DragonAnnouncement -destination 'generic/platform=iOS Simulator' -derivedDataPath "$PWD/.derivedData" \
           $(xcrun --find docc) process-archive \
-            transform-for-static-hosting /tmp/docbuild/Build/Products/Debug-iphoneos/DragonAnnouncement.doccarchive \
-            --hosting-base-path DragonAnnouncement \
+            transform-for-static-hosting "$PWD/.derivedData/Build/Products/Debug-iphoneos/DragonAnnouncement.doccarchive" \
+            --hosting-base-path "DragonAnnouncement" \
             --output-path .docs;
-          echo "<script>window.location.href += \"/documentation/dragonannouncement\"</script>" > docs/index.html;
+          echo "<script>window.location.href += \"documentation/dragonannouncement\"</script>" > docs/index.html;
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3

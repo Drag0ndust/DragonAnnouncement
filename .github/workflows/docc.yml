@@ -27,7 +27,7 @@ jobs:
           xcode-version: "15.0.0"
       - name: Run Build Docs
         run: |
-          xcodebuild docbuild -scheme DragonAnnouncement -destination 'generic/platform=iOS Simulator' -derivedDataPath "$PWD/.derivedData" \
+          xcodebuild docbuild -scheme DragonAnnouncement -destination 'generic/platform=iOS Simulator' -derivedDataPath "$PWD/.derivedData"; \
           $(xcrun --find docc) process-archive \
             transform-for-static-hosting "$PWD/.derivedData/Build/Products/Debug-iphoneos/DragonAnnouncement.doccarchive" \
             --hosting-base-path "DragonAnnouncement" \

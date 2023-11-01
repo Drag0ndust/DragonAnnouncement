@@ -30,7 +30,7 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
         .onAppear {
             if case let .local(announcement) = type {
                 DispatchQueue.main.asyncAfter(deadline: .now() + announcement.displayAfter) {
-                    self.showAnnouncementView()
+                    showAnnouncementView()
                 }
             }
         }

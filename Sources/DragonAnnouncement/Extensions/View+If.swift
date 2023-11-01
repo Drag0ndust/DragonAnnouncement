@@ -10,10 +10,10 @@ import SwiftUI
 /// Source: https://stackoverflow.com/a/76436298
 extension View {
     @ViewBuilder
-    func `if`<TrueContent: View, FalseContent: View>(
+    func `if`(
         _ condition: Bool,
-        if ifTransform: (Self) -> TrueContent,
-        else elseTransform: (Self) -> FalseContent
+        if ifTransform: (Self) -> some View,
+        else elseTransform: (Self) -> some View
     ) -> some View {
         if condition {
             ifTransform(self)

@@ -7,24 +7,26 @@
 
 import Foundation
 
+// MARK: - Announcement
+
 // Think about to change this into a protocol
 public struct Announcement: Decodable {
     // ID of the announcement
-    let id: UUID
+    public let id: UUID
 
     // Title of the announcement
-    let title: String
+    public let title: String
 
     // Message of the announcement
-    let message: String
+    public let message: String
 
     // External URL which can be opened if provided
-    let urlToOpen: URL?
+    public let urlToOpen: URL?
 
     /// Time after which the announcement will be shown
     /// - For local announcement it is the time after the view modifier appeared
     /// - For remote announcement it will be the time after the data was received till it gets presented
-    let displayAfter: TimeInterval
+    public let displayAfter: TimeInterval
 
     /// Initializer
     /// - Parameters:
@@ -45,5 +47,20 @@ public struct Announcement: Decodable {
         self.message = message
         self.urlToOpen = urlToOpen
         self.displayAfter = displayAfter
+    }
+}
+
+extension Announcement {
+    static func preview() -> Announcement {
+        .init(title: "My Announcement Title",
+              message: "My Announcement Message",
+              urlToOpen: URL(
+                  string: "https://github.com/Drag0ndust/DragonAnnouncement/tree/develop"
+              ))
+    }
+
+    static func previewLongMessage() -> Announcement {
+        .init(title: "My Announcement Title",
+              message: "This is a very long message, which is more than one line to check how the linewrap and everything works.")
     }
 }

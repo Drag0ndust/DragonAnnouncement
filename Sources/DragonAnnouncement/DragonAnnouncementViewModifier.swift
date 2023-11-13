@@ -11,8 +11,8 @@ import SwiftUI
 @available(iOS 13.0, *)
 public struct DragonAnnouncementViewModifier: ViewModifier {
     @State private var showAnnouncement: Bool = false
+    @State private var announcement: Announcement?
     let type: AnnouncementType
-    private var announcement: Announcement?
 
     /// Initializer
     /// - Parameter type: Announcement type
@@ -32,6 +32,8 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
                         }
                     }
                     .padding(.horizontal)
+                } else {
+                    Text("test")
                 }
             }
             .offset(y: showAnnouncement ? 0 : 1000)
@@ -42,7 +44,11 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
                     show(announcement)
                 case let .remote(url):
                     // load data from url and decide then to show it
-                    break
+                    Task {
+                        if let announcement = await RemoteAnnouncementService.loadRemoteAnnouncement(from: url) {
+                            show(announcement)
+                        }
+                    }
             }
         }
     }
@@ -50,6 +56,7 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
     /// Show a announcement according to its settings
     /// - Parameter announcement: The announcement which should be shown
     private func show(_ announcement: Announcement) {
+        self.announcement = announcement
         DispatchQueue.main.asyncAfter(deadline: .now() + announcement.displayAfter) {
             withAnimation(.easeInOut(duration: 0.75)) {
                 showAnnouncement.toggle()

@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Announcement
+
 // Think about to change this into a protocol
 public struct Announcement: Decodable {
     // ID of the announcement
@@ -45,5 +47,20 @@ public struct Announcement: Decodable {
         self.message = message
         self.urlToOpen = urlToOpen
         self.displayAfter = displayAfter
+    }
+}
+
+extension Announcement {
+    static func preview() -> Announcement {
+        .init(title: "My Announcement Title",
+              message: "My Announcement Message",
+              urlToOpen: URL(
+                  string: "https://github.com/Drag0ndust/DragonAnnouncement/tree/develop"
+              ))
+    }
+
+    static func previewLongMessage() -> Announcement {
+        .init(title: "My Announcement Title",
+              message: "This is a very long message, which is more than one line to check how the linewrap and everything works.")
     }
 }

@@ -12,34 +12,48 @@ import SwiftUI
 public struct DragonAnnouncementViewModifier: ViewModifier {
     @State private var showAnnouncement: Bool = false
     let type: AnnouncementType
+    private var announcement: Announcement?
+
+    /// Initializer
+    /// - Parameter type: Announcement type
+    public init(type: AnnouncementType) {
+        self.type = type
+    }
 
     public func body(content: Content) -> some View {
         ZStack {
             content
             VStack {
                 Spacer()
-                AnnouncementView(type: type) {
-                    withAnimation(.easeInOut(duration: 0.75)) {
-                        showAnnouncement.toggle()
+                if let announcement {
+                    AnnouncementView(announcement) {
+                        withAnimation(.easeInOut(duration: 0.75)) {
+                            showAnnouncement.toggle()
+                        }
                     }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
             }
             .offset(y: showAnnouncement ? 0 : 1000)
         }
         .onAppear {
-            if case let .local(announcement) = type {
-                DispatchQueue.main.asyncAfter(deadline: .now() + announcement.displayAfter) {
-                    showAnnouncementView()
-                }
+            switch type {
+                case let .local(announcement):
+                    show(announcement)
+                case let .remote(url):
+                    // load data from url and decide then to show it
+                    break
             }
         }
     }
 
-    /// Toggle the announcement view with an animation
-    func showAnnouncementView() {
-        withAnimation(.easeInOut(duration: 0.75)) {
-            showAnnouncement.toggle()
+    /// Show a announcement according to its settings
+    /// - Parameter announcement: The announcement which should be shown
+    private func show(_ announcement: Announcement) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + announcement.displayAfter) {
+            withAnimation(.easeInOut(duration: 0.75)) {
+                showAnnouncement.toggle()
+            }
         }
     }
 }

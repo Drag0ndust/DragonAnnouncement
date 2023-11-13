@@ -11,27 +11,21 @@ import SwiftUI
 
 struct AnnouncementView: View {
     @Environment(\.openURL) var openURL
-    let type: AnnouncementType
     let dismiss: () -> Void
 
-    init(type: AnnouncementType, dismiss: @escaping () -> Void) {
-        self.type = type
-        self.dismiss = dismiss
-
-        switch type {
-            case let .local(announcement):
-                title = announcement.title
-                message = announcement.message
-                urlToOpen = announcement.urlToOpen
-            case .remote:
-                // Remote functionality will be implemented later
-                break
-        }
-    }
-
+    private let announcement: Announcement
     private var title: String = ""
     private var message: String = ""
     private var urlToOpen: URL? = nil
+
+    init(_ announcement: Announcement, dismiss: @escaping () -> Void) {
+        self.announcement = announcement
+        self.dismiss = dismiss
+
+        title = announcement.title
+        message = announcement.message
+        urlToOpen = announcement.urlToOpen
+    }
 
     var body: some View {
         VStack(spacing: 15) {
@@ -82,7 +76,7 @@ struct AnnouncementView: View {
 
 #Preview {
     VStack(spacing: 50) {
-        AnnouncementView(type: .preview(), dismiss: {})
-        AnnouncementView(type: .previewLongMessage(), dismiss: {})
+        AnnouncementView(.preview(), dismiss: {})
+        AnnouncementView(.previewLongMessage(), dismiss: {})
     }
 }

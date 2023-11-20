@@ -10,8 +10,10 @@ import SwiftUI
 
 @available(iOS 13.0, *)
 public struct DragonAnnouncementViewModifier: ViewModifier {
-    @State private var showAnnouncement: Bool = false
-    @State private var announcement: Announcement?
+    /// Viewmodel of the ViewModifier
+    @State private var viewmodel: DragonAnnouncementViewModel = DragonAnnouncementViewModel()
+
+    /// Announcement type
     let type: AnnouncementType
 
     /// Initializer
@@ -25,10 +27,10 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
             content
             VStack {
                 Spacer()
-                if let announcement {
+                if let announcement = viewmodel.announcement {
                     AnnouncementView(announcement) {
                         withAnimation(.easeInOut(duration: 0.75)) {
-                            showAnnouncement.toggle()
+                            viewmodel.toggleAnnouncement()
                         }
                     }
                     .padding(.horizontal)
@@ -36,7 +38,7 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
                     Text("test")
                 }
             }
-            .offset(y: showAnnouncement ? 0 : 1000)
+            .offset(y: viewmodel.showAnnouncement ? 0 : 1000)
         }
         .onAppear {
             switch type {
@@ -56,10 +58,10 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
     /// Show a announcement according to its settings
     /// - Parameter announcement: The announcement which should be shown
     private func show(_ announcement: Announcement) {
-        self.announcement = announcement
+        viewmodel.announcement = announcement
         DispatchQueue.main.asyncAfter(deadline: .now() + announcement.displayAfter) {
             withAnimation(.easeInOut(duration: 0.75)) {
-                showAnnouncement.toggle()
+                viewmodel.toggleAnnouncement()
             }
         }
     }

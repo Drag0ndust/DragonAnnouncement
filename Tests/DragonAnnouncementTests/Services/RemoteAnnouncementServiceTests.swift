@@ -12,7 +12,7 @@ final class RemoteAnnouncementServiceTests: XCTestCase {
     func test_loading_of_remote_announcement() async {
         let url =
             URL(
-                string: "https://raw.githubusercontent.com/Drag0ndust/DragonAnnouncement/feature/8-remote-announcement/Tests/Testdata/RemoteAnnouncementExample.json"
+                string: "https://raw.githubusercontent.com/Drag0ndust/DragonAnnouncement/develop/Tests/Testdata/RemoteAnnouncementExample.json"
             )!
         let announcement = await RemoteAnnouncementService.loadRemoteAnnouncement(from: url)
 

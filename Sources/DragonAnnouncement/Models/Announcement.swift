@@ -11,16 +11,16 @@ import Foundation
 
 // Think about to change this into a protocol
 public struct Announcement: Decodable {
-    // ID of the announcement
+    /// ID of the announcement
     public let id: UUID
 
-    // Title of the announcement
+    /// Title of the announcement
     public let title: String
 
-    // Message of the announcement
+    /// Message of the announcement
     public let message: String
 
-    // External URL which can be opened if provided
+    /// External URL which can be opened if provided
     public let urlToOpen: URL?
 
     /// Time after which the announcement will be shown

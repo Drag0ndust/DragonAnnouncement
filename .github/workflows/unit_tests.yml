@@ -42,7 +42,7 @@ jobs:
       env:
         cache-name: cache-homebrew-packages
       with:
-        path: ./vendor
+        path: /opt/homebrew/Cellar
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./Brewfile.lock.json') }}
       
     - name: Xcode

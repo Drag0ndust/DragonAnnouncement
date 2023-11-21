@@ -42,7 +42,7 @@ jobs:
       env:
         cache-name: cache-homebrew-packages
       with:
-        path: /opt/homebrew/Cellar
+        path: /usr/local/opt/
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./Brewfile.lock.json') }}
       
     - name: Xcode
@@ -57,9 +57,6 @@ jobs:
     - name: Install Homebrew Dependencies/
       if: ${{ steps.cache-homebrew.outputs.cache-hit != 'true' }}
       run: brew bundle
-
-    - name: List Homebrew directory
-      run: brew --prefix swiftformat
       
     - name: Run Unit Tests
       run: bundle exec fastlane ios unit_tests

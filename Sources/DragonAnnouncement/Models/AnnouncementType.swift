@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - AnnouncementType
 
-/// The type if an announcement
+/// The type of an announcement
 /// - it can be a local created one
 /// - or a remote one
 public enum AnnouncementType {

@@ -11,16 +11,16 @@ import Foundation
 
 // Think about to change this into a protocol
 public struct Announcement: Decodable {
-    // ID of the announcement
+    /// ID of the announcement
     public let id: UUID
 
-    // Title of the announcement
+    /// Title of the announcement
     public let title: String
 
-    // Message of the announcement
+    /// Message of the announcement
     public let message: String
 
-    // External URL which can be opened if provided
+    /// External URL which can be opened if provided
     public let urlToOpen: URL?
 
     /// Time after which the announcement will be shown
@@ -51,6 +51,8 @@ public struct Announcement: Decodable {
 }
 
 extension Announcement {
+    /// This methods creates a test announcment for the Xcode preview
+    /// - Returns: Announcement with standard values
     static func preview() -> Announcement {
         .init(title: "My Announcement Title",
               message: "My Announcement Message",
@@ -59,6 +61,8 @@ extension Announcement {
               ))
     }
 
+    /// This methods creates a test announcment for the Xcode preview
+    /// - Returns: Announcement witch a very long message
     static func previewLongMessage() -> Announcement {
         .init(title: "My Announcement Title",
               message: "This is a very long message, which is more than one line to check how the linewrap and everything works.")

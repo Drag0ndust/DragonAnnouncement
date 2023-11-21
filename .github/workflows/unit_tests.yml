@@ -17,17 +17,46 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+
+    - name: Cache Swift Packages
+      id: cache-spm
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-swift-packages
+      with:
+        path: ./.build
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./Package.resolved') }}
+
+    - name: Cache Ruby Packages
+      id: cache-ruby
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-ruby-packages
+      with:
+        path: ./vendor
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./Gemfile.lock') }}
+
+    - name: Cache Homebrew Packages
+      id: cache-homebrew
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-homebrew-packages
+      with:
+        path: ./vendor
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./Brewfile.lock.json') }}
       
     - name: Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: latest-stable
     
-    - name: Update dependencies
+    - if: ${{ steps.cache-ruby.outputs.cache-hit != 'true' }}
+      name: Update Gem Dependencies
       run: bundle install --path vendor/bundle
 
-    - name: Install build log formatter
-      run: brew install xcbeautify
+    - if: ${{ steps.cache-homebrew.outputs.cache-hit != 'true' }}
+      name: Install Homebrew Dependencies/
+      run: brew bundle
       
     - name: Run Unit Tests
       run: bundle exec fastlane ios unit_tests

@@ -50,13 +50,16 @@ jobs:
       with:
         xcode-version: latest-stable
     
-    - if: ${{ steps.cache-ruby.outputs.cache-hit != 'true' }}
-      name: Update Gem Dependencies
+    - name: Install Gem Dependencies
+      if: ${{ steps.cache-ruby.outputs.cache-hit != 'true' }}
       run: bundle install --path vendor/bundle
 
-    - if: ${{ steps.cache-homebrew.outputs.cache-hit != 'true' }}
-      name: Install Homebrew Dependencies/
+    - name: Install Homebrew Dependencies/
+      if: ${{ steps.cache-homebrew.outputs.cache-hit != 'true' }}
       run: brew bundle
+
+    - name: List Homebrew directory
+      run: brew --prefix swiftformat
       
     - name: Run Unit Tests
       run: bundle exec fastlane ios unit_tests

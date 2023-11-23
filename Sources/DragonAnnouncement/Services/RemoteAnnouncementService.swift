@@ -7,8 +7,10 @@
 
 import Foundation
 
-struct RemoteAnnouncementService {
-    static func loadRemoteAnnouncement(from url: URL) async -> Announcement? {
+public struct RemoteAnnouncementService {
+    public init() {}
+
+    func loadRemoteAnnouncement(from url: URL) async -> Announcement? {
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             let decoder = JSONDecoder()

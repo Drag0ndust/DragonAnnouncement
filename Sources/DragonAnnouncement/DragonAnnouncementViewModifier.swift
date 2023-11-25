@@ -19,9 +19,9 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
 
     /// Initializer
     /// - Parameter type: Announcement type
-    public init(type: AnnouncementType, remoteAnnouncementService: RemoteAnnouncementService = .init()) {
+    public init(type: AnnouncementType) {
         self.type = type
-        self.remoteAnnouncementService = remoteAnnouncementService
+        remoteAnnouncementService = .init()
     }
 
     public func body(content: Content) -> some View {
@@ -32,7 +32,7 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
                 if let announcement = viewmodel.announcement {
                     AnnouncementView(announcement) {
                         withAnimation(.easeInOut(duration: 0.75)) {
-                            viewmodel.toggleAnnouncement()
+                            viewmodel.showAnnouncementOnScreen()
                         }
                     }
                     .padding(.horizontal)
@@ -63,7 +63,7 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
         viewmodel.announcement = announcement
         DispatchQueue.main.asyncAfter(deadline: .now() + announcement.displayAfter) {
             withAnimation(.easeInOut(duration: 0.75)) {
-                viewmodel.toggleAnnouncement()
+                viewmodel.showAnnouncementOnScreen()
             }
         }
     }

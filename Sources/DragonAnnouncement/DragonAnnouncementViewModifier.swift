@@ -12,6 +12,7 @@ import SwiftUI
 public struct DragonAnnouncementViewModifier: ViewModifier {
     /// Viewmodel of the ViewModifier
     @State private var viewmodel: DragonAnnouncementViewModel = DragonAnnouncementViewModel()
+    private let remoteAnnouncementService: RemoteAnnouncementService
 
     /// Announcement type
     let type: AnnouncementType
@@ -20,6 +21,7 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
     /// - Parameter type: Announcement type
     public init(type: AnnouncementType) {
         self.type = type
+        remoteAnnouncementService = .init()
     }
 
     public func body(content: Content) -> some View {
@@ -30,7 +32,7 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
                 if let announcement = viewmodel.announcement {
                     AnnouncementView(announcement) {
                         withAnimation(.easeInOut(duration: 0.75)) {
-                            viewmodel.toggleAnnouncement()
+                            viewmodel.showAnnouncementOnScreen()
                         }
                     }
                     .padding(.horizontal)
@@ -47,7 +49,7 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
                 case let .remote(url):
                     // load data from url and decide then to show it
                     Task {
-                        if let announcement = await RemoteAnnouncementService.loadRemoteAnnouncement(from: url) {
+                        if let announcement = await remoteAnnouncementService.loadRemoteAnnouncement(from: url) {
                             show(announcement)
                         }
                     }
@@ -61,7 +63,7 @@ public struct DragonAnnouncementViewModifier: ViewModifier {
         viewmodel.announcement = announcement
         DispatchQueue.main.asyncAfter(deadline: .now() + announcement.displayAfter) {
             withAnimation(.easeInOut(duration: 0.75)) {
-                viewmodel.toggleAnnouncement()
+                viewmodel.showAnnouncementOnScreen()
             }
         }
     }

@@ -10,7 +10,7 @@ import Foundation
 // MARK: - Announcement
 
 // Think about to change this into a protocol
-public struct Announcement: Decodable {
+public struct Announcement {
     /// ID of the announcement
     public let id: UUID
 
@@ -49,6 +49,10 @@ public struct Announcement: Decodable {
         self.displayAfter = displayAfter
     }
 }
+
+// MARK: Codable
+
+extension Announcement: Codable {}
 
 extension Announcement {
     /// This methods creates a test announcment for the Xcode preview

@@ -1,7 +1,7 @@
 # Contribution Guidelines
 This document contains the rules and guidelines that developers are expected to follow, while contributing to this repository.
 
-* All contributions must NOT add any SwiftLint warnings or errors. There is a GitHub action setup for any PRs to develop, and Xcode will show any warnings/errors.
+* All contributions must NOT add any warnings or errors. There is a GitHub action setup for any PRs to develop.
 
 # About the Project
 
@@ -10,10 +10,10 @@ This document contains the rules and guidelines that developers are expected to 
 # Getting Started
 ## Prerequisites
 * Download Xcode 15.0 or later, and macOS 14.0 or later.
-* Install [SwiftLint](https://github.com/realm/SwiftLint) onto your machine via [Homebrew](https://brew.sh/)
-   * This is not a requirement, but is preferred.
+* Install [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) onto your machine via [Homebrew](https://brew.sh/)
+* This is not a requirement, but is preferred.
 ```sh
-brew install swiftlint
+brew install swiftformat
 ```
 
 ## Start Here
@@ -33,7 +33,7 @@ git remote add upstream <repo url here>
 ```sh
 git checkout -b issueNumber-feature-name
 ```
-* When your feature/fix is complete open a pull request, PR, from your feature branch to the `develop` branch
+* When your feature/fix is complete run SwiftFormat, open a pull request, PR, from your feature branch to the `develop` branch
 
 # Branches and PRs
 * No commits should be made to the `main` branch directly. The `main` branch shall only consist of the deployed code

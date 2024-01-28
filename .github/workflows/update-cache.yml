@@ -1,8 +1,9 @@
 name: Update Cache
 
 on:
-  branch_protection_rule:
-    types: [edited]
+  push:
+    branches:
+      - "develop"
 
 # Limit only the latest workflow created to run
 concurrency:

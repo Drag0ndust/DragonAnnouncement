@@ -1,17 +1,7 @@
-# What it Does
-* Closes #
-* Describe what your change does
+### 🔗 Linked issue
 
-# How I Tested
-* Add a list of steps to show the functionality of your feature
-For example:
-* Run the application
-* Tap the (+) button
-* See this screen
-etc...
+<!-- Please ensure there is an open issue and mention its number. For example, "- Closes #1" "- Resolves #1" -->
 
-# Notes
-* Anything else that should be noted about how you implemented this feature?
+### 📚 Description
 
-# Screenshot
-* Add a screenshot of your new feature! OR show a screen recording of it in action. (On the simulator press Cmd + R to record, and the top button at the top when done). **This video should be longer than 30 seconds.**
+<!-- Describe your changes in detail. Why is this change required? What problem does it solve? -->
